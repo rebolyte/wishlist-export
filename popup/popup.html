@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amazon Wishlist Exporter</title>
+  <link rel="stylesheet" href="popup.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body>
+  <div x-data="wishlistExporter()" class="container">
+    <div class="header">
+      <h1>Amazon Wishlist Exporter</h1>
+    </div>
+
+    <div class="content">
+      <!-- Status Messages -->
+      <div x-show="!isAmazonWishlist" class="message warning">
+        <p>Please navigate to an Amazon wishlist page</p>
+      </div>
+
+      <div x-show="isAmazonWishlist && !loading && !error && !success">
+        <p class="info-text">Export your wishlist to a spreadsheet file</p>
+
+        <div class="export-options">
+          <label class="radio-label">
+            <input type="radio" x-model="exportFormat" value="csv" />
+            <span>CSV</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" x-model="exportFormat" value="excel" />
+            <span>Excel</span>
+          </label>
+        </div>
+
+        <button
+          @click="exportWishlist"
+          class="btn-primary"
+          :disabled="loading"
+        >
+          Export Wishlist
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div x-show="loading" class="message info">
+        <div class="spinner"></div>
+        <p>Extracting wishlist data...</p>
+      </div>
+
+      <!-- Success State -->
+      <div x-show="success" class="message success">
+        <p>✓ Wishlist exported successfully!</p>
+        <p class="small" x-text="`${itemCount} items exported`"></p>
+      </div>
+
+      <!-- Error State -->
+      <div x-show="error" class="message error">
+        <p>✗ Error: <span x-text="errorMessage"></span></p>
+        <button @click="reset" class="btn-secondary">Try Again</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      <p class="small">v1.0.0</p>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
