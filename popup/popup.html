@@ -45,7 +45,8 @@
       <!-- Loading State -->
       <div x-show="loading" class="message info">
         <div class="spinner"></div>
-        <p>Extracting wishlist data...</p>
+        <p x-text="loadingMessage">Loading...</p>
+        <p x-show="scrolling && currentItemCount > 0" class="small" x-text="`${currentItemCount} items found`"></p>
       </div>
 
       <!-- Success State -->

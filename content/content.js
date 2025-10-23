@@ -6,15 +6,124 @@ console.log('Amazon Wishlist Exporter: Content script loaded');
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'extractWishlist') {
-    try {
-      const wishlistData = extractWishlistData();
-      sendResponse({ success: true, data: wishlistData });
-    } catch (error) {
-      sendResponse({ success: false, error: error.message });
-    }
-    return true;
+    // Run async extraction with scrolling
+    extractWishlistWithScrolling(sendResponse);
+    return true; // Keep channel open for async response
   }
 });
+
+// Main function to scroll and extract all wishlist items
+async function extractWishlistWithScrolling(sendResponse) {
+  try {
+    // First, scroll to load all items
+    const scrollResult = await scrollToLoadAllItems((progress) => {
+      // Send progress updates
+      chrome.runtime.sendMessage({
+        action: 'scrollProgress',
+        itemCount: progress.itemCount,
+        isComplete: false
+      });
+    });
+
+    console.log(`Finished scrolling. Total items found: ${scrollResult.totalItems}`);
+
+    // Now extract all the data
+    const wishlistData = extractWishlistData();
+    sendResponse({ success: true, data: wishlistData });
+
+  } catch (error) {
+    console.error('Error during extraction:', error);
+    sendResponse({ success: false, error: error.message });
+  }
+}
+
+// Scroll through the page to trigger lazy loading of all items
+async function scrollToLoadAllItems(progressCallback) {
+  return new Promise((resolve, reject) => {
+    let lastItemCount = 0;
+    let stableCount = 0;
+    const maxStableChecks = 3; // Stop if count is stable for 3 checks
+    let scrollAttempts = 0;
+    const maxScrollAttempts = 100; // Safety limit
+
+    const selectors = [
+      '[data-itemid]',
+      'li[data-id]',
+      '.g-item-sortable',
+      '[data-reposition-action-params]',
+      'li[role="listitem"]'
+    ];
+
+    function getCurrentItemCount() {
+      for (const selector of selectors) {
+        const items = document.querySelectorAll(selector);
+        if (items.length > 0) return items.length;
+      }
+      return 0;
+    }
+
+    function scrollStep() {
+      scrollAttempts++;
+
+      // Scroll to bottom
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'smooth'
+      });
+
+      // Wait for new items to load
+      setTimeout(() => {
+        const currentItemCount = getCurrentItemCount();
+
+        console.log(`Scroll attempt ${scrollAttempts}: Found ${currentItemCount} items`);
+
+        // Check if item count has changed
+        if (currentItemCount === lastItemCount) {
+          stableCount++;
+        } else {
+          stableCount = 0;
+          lastItemCount = currentItemCount;
+        }
+
+        // Send progress update
+        if (progressCallback) {
+          progressCallback({
+            itemCount: currentItemCount,
+            scrollAttempts
+          });
+        }
+
+        // Check if we're done
+        if (stableCount >= maxStableChecks) {
+          console.log('Item count stable. All items loaded.');
+          window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll back to top
+          setTimeout(() => {
+            resolve({ totalItems: currentItemCount });
+          }, 500);
+        } else if (scrollAttempts >= maxScrollAttempts) {
+          console.log('Max scroll attempts reached.');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => {
+            resolve({ totalItems: currentItemCount });
+          }, 500);
+        } else {
+          // Continue scrolling
+          scrollStep();
+        }
+      }, 1500); // Wait 1.5s for items to load
+    }
+
+    // Start scrolling
+    const initialCount = getCurrentItemCount();
+    if (initialCount === 0) {
+      reject(new Error('No items found on page'));
+      return;
+    }
+
+    lastItemCount = initialCount;
+    scrollStep();
+  });
+}
 
 // Function to extract wishlist data from the page
 function extractWishlistData() {

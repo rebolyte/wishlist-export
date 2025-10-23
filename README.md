@@ -4,10 +4,12 @@ A Chrome extension to export your Amazon wishlist to CSV or Excel spreadsheet fo
 
 ## Features
 
+- ✅ **Automatic scrolling** to load all items (handles lazy loading)
 - ✅ Export Amazon wishlists to CSV or Excel format
 - ✅ Works with private wishlists (you must be logged in)
-- ✅ Extracts product details: name, price, rating, URL, image, date added, priority
+- ✅ Extracts product details: name, price, rating, URL, image, date added, priority, comments
 - ✅ Supports multiple Amazon domains (.com, .co.uk, .de, .fr, etc.)
+- ✅ Real-time progress updates showing items found
 - ✅ Simple and clean UI built with Alpine.js
 - ✅ No external servers - all processing happens locally in your browser
 
@@ -54,12 +56,14 @@ A Chrome extension to export your Amazon wishlist to CSV or Excel spreadsheet fo
 
 4. **Export your wishlist**
    - Click "Export Wishlist" button
-   - The extension will extract all items from the current page
+   - The extension will automatically scroll through the page to load all items
+   - You'll see real-time progress as items are discovered
+   - Once all items are loaded, the export will be created automatically
    - A download dialog will appear to save your file
 
 5. **Open the exported file**
    - Open with Excel, Google Sheets, Numbers, or any spreadsheet program
-   - The file includes columns for: Name, Price, Rating, Product URL, Image URL, Date Added, Priority
+   - The file includes columns for: Name, Price, Rating, Product URL, Image URL, Date Added, Priority, Comment
 
 ## Supported Amazon Domains
 
@@ -87,6 +91,7 @@ The spreadsheet includes the following columns:
 | Image URL | Product image URL |
 | Date Added | When the item was added to wishlist |
 | Priority | Item priority (if set) |
+| Comment | Item comment/note (if set) |
 
 ## Troubleshooting
 
@@ -174,17 +179,17 @@ Contributions are welcome! Please:
 
 ## Known Limitations
 
-- Only extracts items from the currently visible page (pagination not yet supported)
-- Amazon's HTML structure may change, requiring updates
-- Some wishlist features may not be captured (comments, quantity, etc.)
+- Amazon's HTML structure may change, requiring updates to selectors
+- Auto-scroll has a safety limit of 100 scroll attempts
+- Very large wishlists (500+ items) may take a minute or two to fully load
 
 ## Future Enhancements
 
-- [ ] Support for pagination (export all pages automatically)
-- [ ] True Excel format with formatting and formulas
+- [ ] True Excel format with formatting and formulas (currently using CSV)
 - [ ] Filter and sort options before export
 - [ ] Export multiple wishlists at once
 - [ ] Custom column selection
+- [ ] Configurable scroll speed and timeout settings
 
 ## License
 
