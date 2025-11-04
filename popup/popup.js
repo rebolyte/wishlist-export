@@ -1,6 +1,4 @@
-/* global chrome, Alpine */
-
-document.addEventListener('alpine:init', () => {
+document.addEventListener('alpine:init', () => {  
   Alpine.data('wishlistExporter', () => ({
     isAmazonWishlist: false,
     loading: false,

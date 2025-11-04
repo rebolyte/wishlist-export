@@ -1,5 +1,10 @@
+## Communication
+
+Be extremely concise in all responses. Sacrifice grammar for the sake of concision.
+
 ## Project overview
 
+- Use minimal JSDoc annotations only when necessary.
 - We are using Chrome extension Manifest V3.
 
 ## Alpine

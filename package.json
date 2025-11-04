@@ -1,0 +1,14 @@
+{
+  "name": "wishlist-export",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:rebolyte/legendary-octo-bassoon.git",
+  "author": "James Irwin <rebolyte@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/alpinejs": "^3.13.11",
+    "chrome-types": "^0.1.385",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {}
+}
