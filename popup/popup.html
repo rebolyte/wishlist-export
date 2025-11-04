@@ -20,7 +20,7 @@
       </div>
 
       <div x-show="isAmazonWishlist && !loading && !error && !success">
-        <p class="info-text">Export your wishlist to a spreadsheet file</p>
+        <p class="info-text">Pick an export format</p>
 
         <div class="export-options">
           <label class="radio-label">
@@ -30,6 +30,10 @@
           <label class="radio-label">
             <input type="radio" x-model="exportFormat" value="json" />
             <span>JSON</span>
+          </label>
+          <label class="radio-label">
+            <input type="radio" x-model="exportFormat" value="html" />
+            <span>HTML</span>
           </label>
         </div>
 
