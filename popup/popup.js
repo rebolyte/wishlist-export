@@ -327,20 +327,25 @@ ${wishlistData.items.map(item => `      <tr>
       </tr>`).join('\n')}
     </tbody>
   </table>
-  <script>
-    window.onload = function() {
-      setTimeout(function() {
-        window.print();
-      }, 500);
-    };
-  </script>
 </body>
 </html>`;
 
       const blob = new Blob([html], { type: 'text/html' });
       const url = URL.createObjectURL(blob);
-      
-      chrome.tabs.create({ url: url });
+      const filename = `amazon-wishlist-${wishlistData.listName || 'export'}-${Date.now()}.html`;
+
+      chrome.downloads.download({
+        url: url,
+        filename: filename,
+        saveAs: false
+      }, (downloadId) => {
+        chrome.downloads.search({ id: downloadId }, (results) => {
+          if (results && results[0] && results[0].filename) {
+            const filePath = 'file://' + results[0].filename;
+            chrome.tabs.create({ url: filePath });
+          }
+        });
+      });
     },
 
     escapeHTML(str) {
