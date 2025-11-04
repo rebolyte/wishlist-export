@@ -244,13 +244,38 @@ function extractWishlistData() {
       }
 
       // Priority
-      const priorityEl = element.querySelector('[data-priority]');
-      const priority = priorityEl ? priorityEl.getAttribute('data-priority') : '';
+      let priority = '';
+      const priorityLabelEl = element.querySelector('span[id^="itemPriorityLabel_"], #itemPriorityLabel');
+      if (priorityLabelEl && priorityLabelEl.textContent) {
+        priority = priorityLabelEl.textContent.trim();
+      } else {
+        const priorityCodeEl = element.querySelector('span[id^="itemPriority_"], #itemPriority');
+        const code = priorityCodeEl ? priorityCodeEl.textContent.trim() : '';
+        if (code === '2') priority = 'highest';
+        else if (code === '1') priority = 'high';
+        else if (code === '0') priority = 'medium';
+        else {
+          const dataPriorityEl = element.querySelector('[data-priority]');
+          priority = dataPriorityEl ? (dataPriorityEl.getAttribute('data-priority') || '').trim() : '';
+        }
+      }
+
+      // Needs / Has counts
+      let needs = '';
+      let has = '';
+      const needsEl = element.querySelector('#itemRequested, span[id^="itemRequested_"]');
+      if (needsEl && needsEl.textContent) needs = needsEl.textContent.trim();
+      const hasEl = element.querySelector('#itemPurchased, span[id^="itemPurchased_"]');
+      if (hasEl && hasEl.textContent) has = hasEl.textContent.trim();
 
       // Comment/Note
       const commentSelectors = [
-        '#itemComment',
+        'span[id^="itemComment"]',
+        '[id^="itemComment_"]',
+        'span.awl-ul-keyword-item-truncated-text',
+        'span[id*="Comment"]',
         'span[id*="comment"]',
+        '#itemComment',
         '.a-size-base.a-color-tertiary'
       ];
 
@@ -273,6 +298,8 @@ function extractWishlistData() {
           imageUrl,
           dateAdded: dateAdded || 'N/A',
           priority: priority || 'N/A',
+          needs: needs || '',
+          has: has || '',
           comment: comment || ''
         });
       }

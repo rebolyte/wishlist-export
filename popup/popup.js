@@ -94,15 +94,17 @@ document.addEventListener('alpine:init', () => {
     },
 
     exportAsCSV(wishlistData) {
-      const headers = ['Name', 'Price', 'Rating', 'Product URL', 'Image URL', 'Date Added', 'Priority', 'Comment'];
+      const headers = ['Name', 'Price', 'Rating', 'Product URL', 'Image URL', 'Date Added', 'Priority', 'Needs', 'Has', 'Comment'];
       const rows = wishlistData.items.map(item => [
         this.escapeCSV(item.name),
         this.escapeCSV(item.price),
         item.rating || '',
         item.url,
         item.imageUrl,
-        item.dateAdded || '',
+        this.escapeCSV(this.formatDateAdded(item.dateAdded || '')),
         item.priority || '',
+        item.needs || '',
+        item.has || '',
         this.escapeCSV(item.comment || '')
       ]);
 
@@ -126,15 +128,17 @@ document.addEventListener('alpine:init', () => {
       // For Excel, we'll use CSV format for simplicity
       // To get true Excel format, we'd need to include SheetJS library
       // For now, CSV with .xlsx extension will work in most cases
-      const headers = ['Name', 'Price', 'Rating', 'Product URL', 'Image URL', 'Date Added', 'Priority', 'Comment'];
+      const headers = ['Name', 'Price', 'Rating', 'Product URL', 'Image URL', 'Date Added', 'Priority', 'Needs', 'Has', 'Comment'];
       const rows = wishlistData.items.map(item => [
         this.escapeCSV(item.name),
         this.escapeCSV(item.price),
         item.rating || '',
         item.url,
         item.imageUrl,
-        item.dateAdded || '',
+        this.escapeCSV(this.formatDateAdded(item.dateAdded || '')),
         item.priority || '',
+        item.needs || '',
+        item.has || '',
         this.escapeCSV(item.comment || '')
       ]);
 
@@ -161,6 +165,12 @@ document.addEventListener('alpine:init', () => {
         return `"${stringValue.replace(/"/g, '""')}"`;
       }
       return stringValue;
+    },
+
+    formatDateAdded(value) {
+      if (value === null || value === undefined) return '';
+      const text = String(value).trim();
+      return text.replace(/^\s*(Item added|Added)\s+/i, '').trim();
     },
 
     reset() {
