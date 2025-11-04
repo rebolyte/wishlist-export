@@ -18,43 +18,44 @@ A Chrome extension to export your Amazon wishlist to CSV or Excel spreadsheet fo
 ### From Source (Developer Mode)
 
 1. **Clone or download this repository**
+
    ```bash
    git clone https://github.com/rebolyte/legendary-octo-bassoon.git
    cd legendary-octo-bassoon
    ```
 
-2. **Add extension icons** (Optional but recommended)
-   - Add `icon16.png`, `icon48.png`, and `icon128.png` to the `icons/` folder
-   - You can use any icon generator or create your own
-   - Recommended: Use an Amazon-themed icon with a download/export symbol
+2. **Load the extension in Chrome**
 
-3. **Load the extension in Chrome**
    - Open Chrome and navigate to `chrome://extensions/`
    - Enable "Developer mode" (toggle in the top right)
    - Click "Load unpacked"
    - Select the `legendary-octo-bassoon` folder
 
-4. **Verify installation**
+3. **Verify installation**
    - You should see the "Amazon Wishlist Exporter" extension in your extensions list
    - Pin the extension to your toolbar for easy access
 
 ## Usage
 
 1. **Navigate to your Amazon wishlist**
+
    - Go to Amazon.com (or any supported Amazon domain)
    - Make sure you're logged in
    - Open any of your wishlists
 
 2. **Open the extension**
+
    - Click the extension icon in your Chrome toolbar
    - The extension will detect if you're on a wishlist page
 
 3. **Choose export format**
+
    - Select either CSV or Excel format
    - CSV is smaller and works with any spreadsheet program
    - Excel (.xlsx) is better for Microsoft Excel users
 
 4. **Export your wishlist**
+
    - Click "Export Wishlist" button
    - The extension will automatically scroll through the page to load all items
    - You'll see real-time progress as items are discovered
@@ -82,29 +83,32 @@ A Chrome extension to export your Amazon wishlist to CSV or Excel spreadsheet fo
 
 The spreadsheet includes the following columns:
 
-| Column | Description |
-|--------|-------------|
-| Name | Product title |
-| Price | Current price (or "N/A" if unavailable) |
-| Rating | Star rating out of 5 |
-| Product URL | Direct link to the product page |
-| Image URL | Product image URL |
-| Date Added | When the item was added to wishlist |
-| Priority | Item priority (if set) |
-| Comment | Item comment/note (if set) |
+| Column      | Description                             |
+| ----------- | --------------------------------------- |
+| Name        | Product title                           |
+| Price       | Current price (or "N/A" if unavailable) |
+| Rating      | Star rating out of 5                    |
+| Product URL | Direct link to the product page         |
+| Image URL   | Product image URL                       |
+| Date Added  | When the item was added to wishlist     |
+| Priority    | Item priority (if set)                  |
+| Comment     | Item comment/note (if set)              |
 
 ## Troubleshooting
 
 ### "Please navigate to an Amazon wishlist page"
+
 - Make sure you're on a valid Amazon wishlist URL
 - The URL should contain `/wishlist/` in the path
 
 ### "No items found in wishlist"
+
 - Refresh the wishlist page and try again
 - Make sure the wishlist has items
 - Amazon may have changed their page structure - please report an issue
 
 ### Export doesn't work
+
 - Check that you've granted the extension permission to access Amazon domains
 - Try reloading the wishlist page
 - Check the browser console for errors (F12 → Console tab)
@@ -112,6 +116,7 @@ The spreadsheet includes the following columns:
 ## Privacy
 
 This extension:
+
 - ✅ Runs entirely in your browser
 - ✅ Does NOT send any data to external servers
 - ✅ Does NOT collect or store your personal information
@@ -199,6 +204,8 @@ MIT License - See LICENSE file for details
 
 This extension is not affiliated with or endorsed by Amazon. It is an independent tool created to help users export their own wishlist data. Use at your own risk and in accordance with Amazon's Terms of Service.
 
----
+## Errata
 
-Made with ❤️ for wishlist enthusiasts
+https://developer.chrome.com/docs/extensions/get-started/tutorial/hello-world
+
+https://developer.chrome.com/docs/extensions/reference

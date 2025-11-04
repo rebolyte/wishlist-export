@@ -3,11 +3,7 @@
   "name": "Amazon Wishlist Exporter",
   "version": "1.0.0",
   "description": "Export your Amazon wishlist to CSV or Excel spreadsheet",
-  "permissions": [
-    "activeTab",
-    "downloads",
-    "scripting"
-  ],
+  "permissions": ["activeTab", "downloads", "scripting", "management"],
   "host_permissions": [
     "https://www.amazon.com/*",
     "https://www.amazon.co.uk/*",

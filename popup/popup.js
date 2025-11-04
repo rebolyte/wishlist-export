@@ -10,8 +10,11 @@ function wishlistExporter() {
     currentItemCount: 0,
     exportFormat: 'csv',
     loadingMessage: 'Starting export...',
+    loadTime: '',
 
     async init() {
+      const now = new Date();
+      this.loadTime = now.toLocaleString();
       // Check if current tab is an Amazon wishlist
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
       this.isAmazonWishlist = tab.url && tab.url.includes('amazon') && tab.url.includes('wishlist');
@@ -165,6 +168,10 @@ function wishlistExporter() {
       this.errorMessage = '';
       this.scrolling = false;
       this.currentItemCount = 0;
+    },
+
+    reloadExtension() {
+      chrome.runtime.reload();
     }
   };
 }
