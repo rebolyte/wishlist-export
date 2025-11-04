@@ -4,6 +4,8 @@ Be extremely concise in all responses. Sacrifice grammar for the sake of concisi
 
 ## Project overview
 
+- Do not add emojis.
+- Do not add comments in any code unless it is extremely complicated.
 - Use minimal JSDoc annotations only when necessary.
 - We are using Chrome extension Manifest V3.
 

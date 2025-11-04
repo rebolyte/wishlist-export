@@ -69,6 +69,8 @@ document.addEventListener('alpine:init', () => {
               return;
             }
 
+            wishlistData.url = tab.url;
+
             this.itemCount = wishlistData.items.length;
             this.loadingMessage = 'Creating export file...';
 
@@ -76,7 +78,7 @@ document.addEventListener('alpine:init', () => {
             if (this.exportFormat === 'csv') {
               this.exportAsCSV(wishlistData);
             } else {
-              this.exportAsExcel(wishlistData);
+              this.exportAsJSON(wishlistData);
             }
 
             this.success = true;
@@ -124,32 +126,19 @@ document.addEventListener('alpine:init', () => {
       });
     },
 
-    exportAsExcel(wishlistData) {
-      // For Excel, we'll use CSV format for simplicity
-      // To get true Excel format, we'd need to include SheetJS library
-      // For now, CSV with .xlsx extension will work in most cases
-      const headers = ['Name', 'Price', 'Rating', 'Product URL', 'Image URL', 'Date Added', 'Priority', 'Needs', 'Has', 'Comment'];
-      const rows = wishlistData.items.map(item => [
-        this.escapeCSV(item.name),
-        this.escapeCSV(item.price),
-        item.rating || '',
-        item.url,
-        item.imageUrl,
-        this.escapeCSV(this.formatDateAdded(item.dateAdded || '')),
-        item.priority || '',
-        item.needs || '',
-        item.has || '',
-        this.escapeCSV(item.comment || '')
-      ]);
-
-      const csvContent = [
-        headers.join(','),
-        ...rows.map(row => row.join(','))
-      ].join('\n');
-
-      const blob = new Blob([csvContent], { type: 'application/vnd.ms-excel' });
+    exportAsJSON(wishlistData) {
+      const formattedData = {
+        ...wishlistData,
+        items: wishlistData.items.map(item => ({
+          ...item,
+          dateAdded: this.formatDateAdded(item.dateAdded || '')
+        }))
+      };
+      
+      const jsonContent = JSON.stringify(formattedData, null, 2);
+      const blob = new Blob([jsonContent], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      const filename = `amazon-wishlist-${wishlistData.listName || 'export'}-${Date.now()}.xlsx`;
+      const filename = `amazon-wishlist-${wishlistData.listName || 'export'}-${Date.now()}.json`;
 
       chrome.downloads.download({
         url: url,
