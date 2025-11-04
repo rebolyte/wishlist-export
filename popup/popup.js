@@ -1,5 +1,7 @@
-function wishlistExporter() {
-  return {
+/* global chrome, Alpine */
+
+document.addEventListener('alpine:init', () => {
+  Alpine.data('wishlistExporter', () => ({
     isAmazonWishlist: false,
     loading: false,
     scrolling: false,
@@ -13,6 +15,7 @@ function wishlistExporter() {
     loadTime: '',
 
     async init() {
+      console.log('init');
       const now = new Date();
       this.loadTime = now.toLocaleString();
       // Check if current tab is an Amazon wishlist
@@ -173,5 +176,5 @@ function wishlistExporter() {
     reloadExtension() {
       chrome.runtime.reload();
     }
-  };
-}
+  }));
+});

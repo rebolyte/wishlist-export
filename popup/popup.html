@@ -8,7 +8,7 @@
   <script defer src="../vendor/alpine-3.15.1-csp.min.js"></script>
 </head>
 <body>
-  <div x-data="wishlistExporter()" class="container">
+  <div x-data="wishlistExporter" class="container">
     <div class="header">
       <h1>Amazon Wishlist Exporter</h1>
     </div>
@@ -46,13 +46,13 @@
       <div x-show="loading" class="message info">
         <div class="spinner"></div>
         <p x-text="loadingMessage">Loading...</p>
-        <p x-show="scrolling && currentItemCount > 0" class="small" x-text="`${currentItemCount} items found`"></p>
+        <p x-show="scrolling && currentItemCount > 0" class="small" x-text="currentItemCount + ' items found'"></p>
       </div>
 
       <!-- Success State -->
       <div x-show="success" class="message success">
         <p>✓ Wishlist exported successfully!</p>
-        <p class="small" x-text="`${itemCount} items exported`"></p>
+        <p class="small" x-text="itemCount + ' items exported'"></p>
       </div>
 
       <!-- Error State -->
@@ -64,7 +64,7 @@
 
     <div class="footer">
       <p class="small">v1.0.0</p>
-      <p class="small" x-text="`Loaded: ${loadTime}`"></p>
+      <p class="small" x-text="'Loaded: ' + loadTime"></p>
       <button @click="reloadExtension" class="btn-secondary btn-reload">Reload Extension</button>
     </div>
   </div>
