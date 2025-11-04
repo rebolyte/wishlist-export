@@ -292,7 +292,7 @@ document.addEventListener('alpine:init', () => {
   </style>
 </head>
 <body>
-  <h1>Wish List</h1>
+  <h1>Wish List - ${this.escapeHTML(wishlistData.listName || 'Wishlist')}</h1>
   <div class="wishlist-info">
     <div class="wishlist-url"><a href="${this.escapeHTML(wishlistData.url || '')}" target="_blank">${this.escapeHTML(wishlistData.url || '')}</a></div>
     <div class="exported-at">Exported: ${new Date().toLocaleString()}</div>
