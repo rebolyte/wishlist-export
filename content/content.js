@@ -168,7 +168,25 @@ function extractWishlistData() {
         if (nameEl && nameEl.textContent.trim()) break;
       }
 
-      const name = nameEl ? nameEl.textContent.trim() : '';
+      const title = nameEl ? nameEl.textContent.trim() : '';
+
+      // Subtitle (byline with author/format info)
+      const bylineSelectors = [
+        'span[id*="item-byline"]',
+        'span.a-size-base',
+        '.a-row.a-size-small span.a-size-base'
+      ];
+
+      let subtitle = '';
+      for (const selector of bylineSelectors) {
+        const bylineEl = element.querySelector(selector);
+        if (bylineEl && bylineEl.textContent.trim()) {
+          subtitle = bylineEl.textContent.trim();
+          break;
+        }
+      }
+
+      const name = subtitle ? `${title} ${subtitle}` : title;
 
       // Product URL
       let url = nameEl ? nameEl.href : '';
@@ -292,6 +310,8 @@ function extractWishlistData() {
       if (name) {
         items.push({
           name,
+          title,
+          subtitle,
           price: price || 'N/A',
           rating: rating || 'N/A',
           url,

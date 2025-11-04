@@ -131,10 +131,13 @@ document.addEventListener('alpine:init', () => {
     exportAsJSON(wishlistData) {
       const formattedData = {
         ...wishlistData,
-        items: wishlistData.items.map(item => ({
-          ...item,
-          dateAdded: this.formatDateAdded(item.dateAdded || '')
-        }))
+        items: wishlistData.items.map(item => {
+          const { title, subtitle, ...itemData } = item;
+          return {
+            ...itemData,
+            dateAdded: this.formatDateAdded(item.dateAdded || '')
+          };
+        })
       };
       
       const jsonContent = JSON.stringify(formattedData, null, 2);
@@ -315,8 +318,8 @@ ${wishlistData.items.map(item => `      <tr>
           ${item.imageUrl ? `<img src="${this.escapeHTML(item.imageUrl)}" alt="">` : ''}
         </td>
         <td class="title-cell">
-          <div class="product-title"><a href="${this.escapeHTML(item.url || '')}" target="_blank">${this.escapeHTML(item.name)}</a></div>
-          <div class="product-details">${this.escapeHTML(this.extractAuthorDetails(item.name))}</div>
+          <div class="product-title"><a href="${this.escapeHTML(item.url || '')}" target="_blank"><strong>${this.escapeHTML(item.title)}</strong></a></div>
+          <div class="product-details">${this.escapeHTML(item.subtitle || '')}</div>
         </td>
         <td class="comments-cell">${this.escapeHTML(item.comment || '')}</td>
         <td class="price-cell">${this.escapeHTML(item.price || '')}</td>
@@ -353,12 +356,6 @@ ${wishlistData.items.map(item => `      <tr>
       const div = document.createElement('div');
       div.textContent = str;
       return div.innerHTML;
-    },
-
-    extractAuthorDetails(name) {
-      if (!name) return '';
-      const byMatch = name.match(/by\s+(.+)$/i);
-      return byMatch ? byMatch[0] : '';
     },
 
     escapeCSV(value) {
