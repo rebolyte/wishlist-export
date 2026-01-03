@@ -10,12 +10,9 @@ document.addEventListener('alpine:init', () => {
     currentItemCount: 0,
     exportFormat: 'csv',
     loadingMessage: 'Starting export...',
-    loadTime: '',
 
     async init() {
       console.log('init');
-      const now = new Date();
-      this.loadTime = now.toLocaleString();
       // Check if current tab is an Amazon wishlist
       const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
       this.isAmazonWishlist = tab.url && tab.url.includes('amazon') && tab.url.includes('wishlist');

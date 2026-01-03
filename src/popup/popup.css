@@ -155,8 +155,11 @@ body {
 }
 
 .footer {
+  display: flex;
   padding: 12px;
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   background: #f5f5f5;
   border-top: 1px solid #e0e0e0;
 }
@@ -164,4 +167,8 @@ body {
 .footer .small {
   color: #999;
   margin: 0;
+}
+
+.footer .small a {
+  color: #999;
 }
