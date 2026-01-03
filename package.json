@@ -1,8 +1,8 @@
 {
-  "name": "wishlist-export",
-  "version": "1.0.0",
+  "name": "amazon-wishlist-exporter",
+  "version": "2026.01.1",
   "main": "index.js",
-  "repository": "git@github.com:rebolyte/legendary-octo-bassoon.git",
+  "repository": "git@github.com:rebolyte/wishlist-export.git",
   "author": "James Irwin <rebolyte@gmail.com>",
   "license": "MIT",
   "devDependencies": {

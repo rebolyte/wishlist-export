@@ -381,8 +381,5 @@ ${wishlistData.items.map(item => `      <tr>
       this.currentItemCount = 0;
     },
 
-    reloadExtension() {
-      chrome.runtime.reload();
-    }
   }));
 });

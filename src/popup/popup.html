@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amazon Wishlist Exporter</title>
   <link rel="stylesheet" href="popup.css">
-  <script defer src="../vendor/alpine-3.15.1-csp.min.js"></script>
+  <script defer src="../../vendor/alpine-3.15.1-csp.min.js"></script>
 </head>
 <body>
   <div x-data="wishlistExporter" class="container">
@@ -69,7 +69,6 @@
     <div class="footer">
       <p class="small">v1.0.0</p>
       <p class="small" x-text="'Loaded: ' + loadTime"></p>
-      <button @click="reloadExtension" class="btn-secondary btn-reload">Reload Extension</button>
     </div>
   </div>
 

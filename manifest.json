@@ -3,7 +3,7 @@
   "name": "Amazon Wishlist Exporter",
   "version": "1.0.0",
   "description": "Export your Amazon wishlist to CSV, JSON, or print to PDF",
-  "permissions": ["activeTab", "downloads", "scripting", "management"],
+  "permissions": ["activeTab", "downloads", "scripting"],
   "host_permissions": [
     "https://www.amazon.com/*",
     "https://www.amazon.co.uk/*",
@@ -17,7 +17,7 @@
     "https://www.amazon.com.au/*"
   ],
   "action": {
-    "default_popup": "popup/popup.html",
+    "default_popup": "src/popup/popup.html",
     "default_icon": {
       "16": "icons/icon16.png",
       "48": "icons/icon48.png",
@@ -43,17 +43,11 @@
         "https://www.amazon.in/*/wishlist/*",
         "https://www.amazon.com.au/*/wishlist/*"
       ],
-      "js": ["content/content.js"],
+      "js": ["src/content/content.js"],
       "run_at": "document_idle"
     }
   ],
   "background": {
-    "service_worker": "background/background.js"
-  },
-  "web_accessible_resources": [
-    {
-      "resources": ["lib/*"],
-      "matches": ["<all_urls>"]
-    }
-  ]
+    "service_worker": "src/background/background.js"
+  }
 }
