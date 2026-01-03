@@ -16,6 +16,10 @@ The extension runs entirely locally in your browser. It doesn't collect anything
 
 ## Installation
 
+### From Chrome Web Store
+
+`TODO`
+
 ### From Source
 
 1. Clone or download this repository
@@ -27,10 +31,6 @@ The extension runs entirely locally in your browser. It doesn't collect anything
    - Select the `wishlist-export` folder
 
 You should see the extension in your extensions list. Pin it in your toolbar for easy access.
-
-### From Chrome Web Store
-
-`TODO`
 
 ## Usage
 
