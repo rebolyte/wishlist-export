@@ -2,7 +2,11 @@
 
 A Chrome extension to export your Amazon wishlists.
 
-![screencap](https://github.com/user-attachments/assets/2a21adee-6aa1-45c8-bef3-1b55a532257f)
+<img width="1437" alt="Image" src="https://github.com/user-attachments/assets/dd9c5de5-39d7-4bb2-ab05-65175e9d0a59" />
+
+<img width="1438" alt="Image" src="https://github.com/user-attachments/assets/39c2f1b7-72b1-4304-a838-00a96474f8b7" />
+
+Also see ![screencap](https://github.com/user-attachments/assets/2a21adee-6aa1-45c8-bef3-1b55a532257f)
 
 Amazon wishlists are convenient because you can quickly save almost any product you find online. But Amazon does not make your wishlists accessible via API or allow OAuth apps to read them. They do have an option to print a wishlist, but doesn't have all the data, doesn't link back to the product pages, and you have to click through to see all items.
 
