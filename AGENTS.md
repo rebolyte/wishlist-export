@@ -8,6 +8,7 @@ Be extremely concise in all responses. Sacrifice grammar for the sake of concisi
 - Do not add comments in any code unless it is extremely complicated.
 - Use minimal JSDoc annotations only when necessary.
 - We are using Chrome extension Manifest V3.
+- I use Yarn for package management. If you have to use NPM, delete package-lock.json when you are done verifying your changes. 
 
 ## Alpine
 

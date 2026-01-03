@@ -5,6 +5,9 @@
   "repository": "git@github.com:rebolyte/wishlist-export.git",
   "author": "James Irwin <rebolyte@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "release": "node scripts/release.js"
+  },
   "devDependencies": {
     "@types/alpinejs": "^3.13.11",
     "chrome-types": "^0.1.385",
