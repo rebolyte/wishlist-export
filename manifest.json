@@ -3,11 +3,7 @@
   "name": "Amazon Wishlist Exporter",
   "version": "2026.01.2",
   "description": "Export your Amazon wishlist to CSV, JSON, or print to PDF",
-  "permissions": [
-    "activeTab",
-    "downloads",
-    "scripting"
-  ],
+  "permissions": ["activeTab", "downloads"],
   "host_permissions": [
     "https://www.amazon.com/*",
     "https://www.amazon.co.uk/*",
@@ -47,9 +43,7 @@
         "https://www.amazon.in/*/wishlist/*",
         "https://www.amazon.com.au/*/wishlist/*"
       ],
-      "js": [
-        "src/content/content.js"
-      ],
+      "js": ["src/content/content.js"],
       "run_at": "document_idle"
     }
   ],
