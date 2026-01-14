@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ## [2026.01.3] - 2026-01-14
 
-- No changes documented
+- Update extension scopes
 
 ## [2026.01.2] - 2026-01-03
 
