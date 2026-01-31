@@ -18,7 +18,7 @@ The extension runs entirely locally in your browser. It doesn't collect anything
 
 ### From Chrome Web Store
 
-`TODO`
+[Install from here](https://chromewebstore.google.com/detail/amazon-wishlist-exporter/gblmcmffihlkimbdndlohpdleoldfebe)
 
 ### From Source
 
