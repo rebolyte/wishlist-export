@@ -37,6 +37,17 @@
           </label>
         </div>
 
+        <div class="filter-section">
+          <label class="filter-label" for="categoryFilter">Category filter</label>
+          <select id="categoryFilter" x-model="categoryFilter" class="select-input">
+            <option value="all">All items</option>
+            <option value="Books">Books only</option>
+            <option value="Movies & TV">Movies & TV</option>
+            <option value="Music">Music</option>
+            <option value="Video Games">Video Games</option>
+          </select>
+        </div>
+
         <button
           @click="exportWishlist"
           class="btn-primary"
@@ -67,7 +78,7 @@
     </div>
 
     <div class="footer">
-      <p class="small">v2026.01.3</p>
+      <p class="small">v2026.01.4</p>
       <p class="small"><a href="https://github.com/rebolyte/wishlist-export" target="_blank">GitHub</a></p>
     </div>
   </div>

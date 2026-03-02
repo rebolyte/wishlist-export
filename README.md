@@ -6,11 +6,13 @@ A Chrome extension to export your Amazon wishlists.
 
 <img width="1438" alt="Image" src="https://github.com/user-attachments/assets/39c2f1b7-72b1-4304-a838-00a96474f8b7" />
 
-Also see ![screencap](https://github.com/user-attachments/assets/2a21adee-6aa1-45c8-bef3-1b55a532257f)
+<video src="https://github.com/user-attachments/assets/2a21adee-6aa1-45c8-bef3-1b55a532257f" controls width="100%"></video>
 
 Amazon wishlists are convenient because you can quickly save almost any product you find online. But Amazon does not make your wishlists accessible via API or allow OAuth apps to read them. They do have an option to print a wishlist, but doesn't have all the data, doesn't link back to the product pages, and you have to click through to see all items.
 
 This extension automates loading all items for you and gives you some export format options (CSV, JSON, or HTML [print to PDF]).
+
+Exports include product name, author, category, ASIN, price, rating, date added, priority, and comments. You can filter by category before exporting -- for example, export only books for easy import into Goodreads, The StoryGraph, or Libby.
 
 The extension runs entirely locally in your browser. It doesn't collect anything about you or send anything anywhere.
 
@@ -37,8 +39,9 @@ You should see the extension in your extensions list. Pin it in your toolbar for
 1. Navigate to your Amazon wishlist
 2. Click the extension icon in your Chrome toolbar
 3. Choose CSV (Excel/Numbers/Google Sheets), JSON, or HTML (print to PDF)
-4. Click "Export Wishlist"
-5. Open the exported file
+4. Optionally filter by category (e.g. "Books only")
+5. Click "Export Wishlist"
+6. Open the exported file
 
 ## Errata
 
