@@ -308,10 +308,34 @@ function extractWishlistData() {
 
       // Only add if we have at least a name
       if (name) {
+        // Extract ASIN from URL or element attributes
+        var asin = '';
+        var itemId = element.getAttribute('data-itemid') || element.getAttribute('data-id') || '';
+        if (url) {
+          var asinMatch = url.match(/\/dp\/([A-Z0-9]{10})/);
+          if (asinMatch) asin = asinMatch[1];
+        }
+        if (!asin) {
+          var repoParams = element.getAttribute('data-reposition-action-params');
+          if (repoParams) {
+            var paramMatch = repoParams.match(/"itemExternalId":"ASIN:([A-Z0-9]{10})"/);
+            if (paramMatch) asin = paramMatch[1];
+          }
+        }
+
+        // Detect category from byline text
+        var category = detectCategory(subtitle, title);
+
+        // Extract author from byline
+        var author = extractAuthor(subtitle);
+
         items.push({
           name,
           title,
           subtitle,
+          author,
+          category,
+          asin,
           price: price || 'N/A',
           rating: rating || 'N/A',
           url,
@@ -332,12 +356,51 @@ function extractWishlistData() {
     throw new Error('No items found on this page. Make sure you are on an Amazon wishlist page.');
   }
 
+  var categories = {};
+  items.forEach(function(item) {
+    if (item.category) {
+      categories[item.category] = (categories[item.category] || 0) + 1;
+    }
+  });
+
   return {
     listName,
     items,
+    categories,
     extractedAt: new Date().toISOString()
   };
 }
 
-// Expose function for testing in console
+function detectCategory(subtitle, title) {
+  var text = ((subtitle || '') + ' ' + (title || '')).toLowerCase();
+
+  if (/\b(hardcover|paperback|kindle|audiobook|audio cd|board book|mass market|library binding)\b/.test(text)) {
+    return 'Books';
+  }
+  if (/\b(blu-ray|dvd|4k ultra|vhs)\b/.test(text)) {
+    return 'Movies & TV';
+  }
+  if (/\b(vinyl|audio cd|music)\b/.test(text) && !/audiobook/.test(text)) {
+    return 'Music';
+  }
+  if (/\b(video game|nintendo|playstation|xbox|ps[45])\b/.test(text)) {
+    return 'Video Games';
+  }
+  return '';
+}
+
+function extractAuthor(subtitle) {
+  if (!subtitle) return '';
+  var match = subtitle.match(/^by\s+(.+?)(?:\s+\(|$)/i);
+  if (match) return match[1].trim();
+  var pipeMatch = subtitle.match(/^(.+?)\s*\|/);
+  if (pipeMatch) {
+    var candidate = pipeMatch[1].trim();
+    if (!/(hardcover|paperback|kindle|audiobook|\$|edition)/i.test(candidate)) {
+      return candidate;
+    }
+  }
+  return '';
+}
+
 window.extractWishlistData = extractWishlistData;

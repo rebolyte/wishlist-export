@@ -37,6 +37,17 @@
           </label>
         </div>
 
+        <div class="filter-section">
+          <label class="filter-label" for="categoryFilter">Category filter</label>
+          <select id="categoryFilter" x-model="categoryFilter" class="select-input">
+            <option value="all">All items</option>
+            <option value="Books">Books only</option>
+            <option value="Movies & TV">Movies & TV</option>
+            <option value="Music">Music</option>
+            <option value="Video Games">Video Games</option>
+          </select>
+        </div>
+
         <button
           @click="exportWishlist"
           class="btn-primary"

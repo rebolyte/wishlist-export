@@ -84,6 +84,34 @@ body {
   cursor: not-allowed;
 }
 
+.filter-section {
+  margin-bottom: 16px;
+}
+
+.filter-label {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 6px;
+}
+
+.select-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+  background: white;
+  color: #333;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.select-input:focus {
+  outline: none;
+  border-color: #ff9900;
+}
+
 .btn-secondary {
   padding: 8px 16px;
   background: white;
