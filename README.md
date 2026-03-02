@@ -12,6 +12,8 @@ Amazon wishlists are convenient because you can quickly save almost any product 
 
 This extension automates loading all items for you and gives you some export format options (CSV, JSON, or HTML [print to PDF]).
 
+Exports include product name, author, category, ASIN, price, rating, date added, priority, and comments. You can filter by category before exporting -- for example, export only books for easy import into Goodreads, The StoryGraph, or Libby.
+
 The extension runs entirely locally in your browser. It doesn't collect anything about you or send anything anywhere.
 
 ## Installation
@@ -37,8 +39,9 @@ You should see the extension in your extensions list. Pin it in your toolbar for
 1. Navigate to your Amazon wishlist
 2. Click the extension icon in your Chrome toolbar
 3. Choose CSV (Excel/Numbers/Google Sheets), JSON, or HTML (print to PDF)
-4. Click "Export Wishlist"
-5. Open the exported file
+4. Optionally filter by category (e.g. "Books only")
+5. Click "Export Wishlist"
+6. Open the exported file
 
 ## Errata
 

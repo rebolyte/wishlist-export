@@ -186,7 +186,7 @@ function extractWishlistData() {
         }
       }
 
-      const name = subtitle ? `${title} ${subtitle}` : title;
+      const name = title;
 
       // Product URL
       let url = nameEl ? nameEl.href : '';
@@ -374,7 +374,7 @@ function extractWishlistData() {
 function detectCategory(subtitle, title) {
   var text = ((subtitle || '') + ' ' + (title || '')).toLowerCase();
 
-  if (/\b(hardcover|paperback|kindle|audiobook|audio cd|board book|mass market|library binding)\b/.test(text)) {
+  if (/\b(hardcover|paperback|kindle|audiobook|board book|mass market|library binding)\b/.test(text)) {
     return 'Books';
   }
   if (/\b(blu-ray|dvd|4k ultra|vhs)\b/.test(text)) {
@@ -383,7 +383,7 @@ function detectCategory(subtitle, title) {
   if (/\b(vinyl|audio cd|music)\b/.test(text) && !/audiobook/.test(text)) {
     return 'Music';
   }
-  if (/\b(video game|nintendo|playstation|xbox|ps[45])\b/.test(text)) {
+  if (/\b(nintendo|playstation|xbox|ps[45])\b/.test(text)) {
     return 'Video Games';
   }
   return '';
